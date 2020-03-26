@@ -48,6 +48,14 @@ public class ServletDbController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String issueTitle = request.getParameter("issueInput");
 		String assignee = request.getParameter("assigneeInput");
 		String priority = request.getParameter("priorityInput");
@@ -65,12 +73,5 @@ public class ServletDbController extends HttpServlet {
 		
 		RequestDispatcher rs = request.getRequestDispatcher("welcome.html");
 		rs.forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 }

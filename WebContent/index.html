@@ -20,18 +20,22 @@
 			<h3>Add new Issue:</h3>
 			<form id="book-input-form">
 				<div class="form-group">
-					<label for="title-input">Issue Title</label> <input id="issue-input"
-						class="form-control" type="text" />
+					<label for="title-input">Issue Title</label> <input
+						id="issue-input" class="form-control" type="text" />
 				</div>
 
 				<div class="form-group">
-					<label for="author-input">Assignee</label> <input id="assignee-input"
-						class="form-control" type="text" />
+					<label for="author-input">Assignee</label> <input
+						id="assignee-input" class="form-control" type="text" />
 				</div>
 
 				<div class="form-group">
-					<label for="price-input">Priority</label> <input id="priority-input"
-						class="form-control" type="text" />
+					<label for="price-input">Priority</label> <select
+						id="priority-input">
+						<option value="1">Low</option>
+						<option value="2">Medium</option>
+						<option value="3">High</option>
+					</select>
 				</div>
 
 				<button class="btn btn-primary" id="save-btn">Add</button>
