@@ -15,5 +15,12 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="C:/Workspace/Application/apache-tomcat-8.0.1/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="C:/Workspace/Application/javax.persistence.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Application/gson-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Application/unirest-objectmapper-jackson-3.7.00.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Application/jackson-core-2.9.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Application/jackson-core-2.9.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Application/jackson-core-2.9.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Application/jackson-all-1.9.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

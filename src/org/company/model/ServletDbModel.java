@@ -18,6 +18,10 @@ public class ServletDbModel {
 		this.priority=priority;
 	}
 	
+	public ServletDbModel() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void setIssueId(Integer issueId){
 		this.issueId = issueId;
 	}
