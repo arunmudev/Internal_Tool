@@ -73,14 +73,14 @@ public class ServletDbDao {
 	}
 
 	/**
-	 * Fetch
+	 * Fetch all data
 	 */	
 	public List<ServletDbModel> listIssues() throws SQLException {
 		List<ServletDbModel> listModel = new ArrayList<>();
 		connect();	 	
 		Statement statement = null;
 		try {
-			String sql = "SELECT * FROM issue_tracker;";	
+			String sql = "SELECT * FROM issue_tracker order by issue_id;";	
 			statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
 			while(resultSet.next()){
@@ -111,5 +111,46 @@ public class ServletDbDao {
 			}
 		}
 		return listModel;
+	}	
+
+	/**
+	 * Fetch particular data
+	 */	
+	public String title(Integer issueIdOne) throws SQLException {
+		String title = null;
+		connect();	 	
+		PreparedStatement statement = null;
+		try {
+			String sql = "SELECT * FROM issue_tracker where issue_id=?;";	
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, issueIdOne);
+			ResultSet resultSet = statement.executeQuery();
+			while(resultSet.next()){
+				Integer issueId = resultSet.getInt("issue_id");
+				String issueTitle = resultSet.getString("issue_title");
+				String assignee = resultSet.getString("assignee");
+				String priority = resultSet.getString("priority");
+				title = resultSet.getString("issue_title");           
+			}
+			System.out.println("fetch success");
+		}catch (SQLException e) {
+
+		}finally {
+			try {
+				if(connection!=null) {
+					connection.close();
+				}
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+				if(statement!=null) {
+					statement.close();
+				}
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		return title;
 	}	
 }
