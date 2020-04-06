@@ -23,6 +23,7 @@
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/servlet-db.js"></script>
+
 <style>
 table {
 	font-family: arial, sans-serif;
@@ -73,8 +74,10 @@ tr:nth-child(even) {
 					</select>
 				</div>
 
-				<button class="btn btn-primary" id="save-btn">Add</button>
-				<button class="btn btn-info" id="view-btn">View</button>
+				<button class="btn btn-primary" id="load-btn">Load</button>
+				<button class="btn btn-primary" id="add-btn">Add</button>
+				<button class="btn btn-primary" id="upd-btn">Edit</button>
+				<button class="btn btn-primary" id="del-btn">Delete</button>
 			</form>
 		</div>
 		<div id="anotherSection">
@@ -91,6 +94,7 @@ tr:nth-child(even) {
 					<th>Issue Priority</th>
 				</tr>
 			</table>
+			<div id="row-count"></div>
 		</div>
 	</div>
 

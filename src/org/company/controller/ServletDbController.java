@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.company.dao.ServletDbDao;
 import org.company.model.ServletDbModel;
+
 import com.google.gson.Gson;
 
 /**
@@ -22,10 +23,6 @@ public class ServletDbController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ServletDbModel model;
 	private ServletDbDao dao;
-
-	public ServletDbController(){
-
-	}
 
 	public void init() {
 		String url = getServletContext().getInitParameter("url");
@@ -38,14 +35,12 @@ public class ServletDbController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {			
-			//String title = dao.title(issueIdOne);
 			response.setContentType("text/plain"); 	
 			List<ServletDbModel> list = dao.listIssues();
 			Gson gson = new Gson();
 			String json = gson.toJson(list);			
 			response.getWriter().write(json); 		     
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -54,21 +49,59 @@ public class ServletDbController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//doGet(request, response);
-		//PrintWriter out = response.getWriter();
-		response.setContentType("text/html");
+		String operationType = request.getParameter("operationType");
+		try{
+		switch(operationType){
+		case "insert" : 
+			insert(request, response);
+			break;
+		case "update" : 
+			update(request, response);
+			break;
+		case "delete" : 
+			delete(request,response);
+			break;
+	}
+		}catch(Exception e){
+			throw new IOException(e);
+		}
+	}
+
+	private void insert(HttpServletRequest request, HttpServletResponse response) {
 		String issueTitle = request.getParameter("issueInput");
 		String assignee = request.getParameter("assigneeInput");
 		String priority = request.getParameter("priorityInput");
 		String issueIn = request.getParameter("idInput");
 		Integer issueId =  Integer.parseInt(issueIn);
 		model = new ServletDbModel(issueId, issueTitle,assignee,priority);
-		//ServletDbDao dao = new ServletDbDao();
 		try {
 			dao.ServletDbDaos(model);
 		} catch (SQLException e) {
-
 			e.printStackTrace();
 		}
+	}
+
+	private void update(HttpServletRequest request, HttpServletResponse response) {
+		String issueTitle = request.getParameter("issueInput");
+		String assignee = request.getParameter("assigneeInput");
+		String issueIn = request.getParameter("idInput");
+		String priority = request.getParameter("priorityInput");
+		Integer issueId =  Integer.parseInt(issueIn);
+		model = new ServletDbModel(issueId, issueTitle,assignee,priority);
+		try{
+			dao.update(model);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+	
+	private void delete(HttpServletRequest request, HttpServletResponse response) {
+		String issueIn = request.getParameter("idInput");
+		Integer issueId =  Integer.parseInt(issueIn);
+        try{
+        	dao.delete(issueId);
+        }catch(SQLException e){
+        	e.printStackTrace();
+        }
 	}
 }

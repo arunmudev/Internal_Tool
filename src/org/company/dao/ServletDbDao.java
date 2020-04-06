@@ -27,7 +27,6 @@ public class ServletDbDao {
 			//open connection
 			try {
 				Class.forName("org.postgresql.Driver");
-
 			}catch(ClassNotFoundException e) {
 				throw new SQLException(e);
 			}
@@ -59,17 +58,16 @@ public class ServletDbDao {
 					connection.close();
 				}
 			}catch (Exception e) {
-				// TODO: handle exception
+				
 			}
 			try {
 				if(statement!=null) {
 					statement.close();
 				}
 			}catch (Exception e) {
-				// TODO: handle exception
+				
 			}
 		}
-
 	}
 
 	/**
@@ -152,5 +150,77 @@ public class ServletDbDao {
 			}
 		}
 		return title;
+	}	
+	
+	/**
+	 * update particular data
+	 */	
+	public void update(ServletDbModel model) throws SQLException {
+		
+		connect();	 	
+		PreparedStatement statement = null;
+		try {
+			String sql = "UPDATE issue_tracker SET issue_title=?,assignee=?,priority=? where issue_id=?;";	
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, model.getIssueTitle());
+			statement.setString(2, model.getAssignee());
+			statement.setString(3, model.getPriority());
+			statement.setInt(4, model.getIssueId());
+			statement.executeUpdate();
+			System.out.println("update success");
+		}catch (SQLException e) {
+
+		}finally {
+			try {
+				if(connection!=null) {
+					connection.close();
+				}
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+				if(statement!=null) {
+					statement.close();
+				}
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		
+	}
+
+	/**
+	 * Delete particular data from db
+	 * @param issueId
+	 * @throws SQLException 
+	 */
+	public void delete(Integer issueId) throws SQLException {
+		connect();	 	
+		PreparedStatement statement = null;
+		try {
+			String sql = "DELETE FROM issue_tracker where issue_id=?;";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, issueId);
+			statement.executeUpdate();
+			System.out.println("delete success");
+		}catch (SQLException e) {
+
+		}finally {
+			try {
+				if(connection!=null) {
+					connection.close();
+				}
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+				if(statement!=null) {
+					statement.close();
+				}
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		
 	}	
 }
